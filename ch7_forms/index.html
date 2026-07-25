@@ -1,0 +1,1715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Soldier Registration Form</title>
+
+    <style>
+        :root {
+            --primary: #263b2a;
+            --primary-light: #3e5d43;
+            --accent: #c5a55a;
+            --background: #edf1eb;
+            --card: #ffffff;
+            --text: #1f2922;
+            --muted: #69746c;
+            --border: #cbd4cd;
+            --danger: #b42318;
+            --success: #18794e;
+            --shadow: 0 20px 50px rgba(31, 41, 34, 0.12);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(
+                    circle at top left,
+                    rgba(197, 165, 90, 0.22),
+                    transparent 35%
+                ),
+                linear-gradient(135deg, #e7ece5, #f5f7f4);
+        }
+
+        button,
+        input,
+        select,
+        textarea {
+            font: inherit;
+        }
+
+        .page-header {
+            padding: 45px 20px 80px;
+            color: #ffffff;
+            text-align: center;
+            background:
+                linear-gradient(
+                    rgba(21, 35, 24, 0.9),
+                    rgba(38, 59, 42, 0.92)
+                ),
+                repeating-linear-gradient(
+                    45deg,
+                    rgba(255, 255, 255, 0.03) 0,
+                    rgba(255, 255, 255, 0.03) 12px,
+                    transparent 12px,
+                    transparent 24px
+                );
+        }
+
+        .header-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 72px;
+            height: 72px;
+            margin-bottom: 16px;
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            color: var(--accent);
+            font-size: 32px;
+            background: rgba(255, 255, 255, 0.07);
+        }
+
+        .page-header h1 {
+            margin: 0 0 12px;
+            font-size: clamp(2rem, 5vw, 3.4rem);
+            letter-spacing: 1px;
+        }
+
+        .page-header p {
+            max-width: 720px;
+            margin: auto;
+            color: #dce5dd;
+            line-height: 1.7;
+        }
+
+        .container {
+            width: min(1150px, calc(100% - 32px));
+            margin: -45px auto 60px;
+        }
+
+        .form-card {
+            overflow: hidden;
+            border: 1px solid rgba(203, 212, 205, 0.9);
+            border-radius: 24px;
+            background: var(--card);
+            box-shadow: var(--shadow);
+        }
+
+        .form-intro {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            justify-content: space-between;
+            padding: 24px 30px;
+            border-bottom: 1px solid var(--border);
+            background: #f8faf7;
+        }
+
+        .form-intro h2 {
+            margin: 0 0 6px;
+            color: var(--primary);
+        }
+
+        .form-intro p {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        .reference-number {
+            padding: 10px 14px;
+            border: 1px solid #d5c08b;
+            border-radius: 10px;
+            color: #634f1e;
+            white-space: nowrap;
+            background: #fff8e6;
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        form {
+            padding: 30px;
+        }
+
+        fieldset {
+            min-width: 0;
+            margin: 0 0 28px;
+            padding: 25px;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            background: #ffffff;
+        }
+
+        fieldset:hover {
+            border-color: #aebbb1;
+        }
+
+        legend {
+            padding: 0 12px;
+            color: var(--primary);
+            font-size: 1.15rem;
+            font-weight: 800;
+        }
+
+        .section-description {
+            margin: -5px 0 22px;
+            color: var(--muted);
+            font-size: 0.92rem;
+            line-height: 1.5;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(12, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .field {
+            grid-column: span 6;
+        }
+
+        .field.third {
+            grid-column: span 4;
+        }
+
+        .field.quarter {
+            grid-column: span 3;
+        }
+
+        .field.full {
+            grid-column: 1 / -1;
+        }
+
+        label,
+        .group-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #344039;
+            font-size: 0.92rem;
+            font-weight: 700;
+        }
+
+        .required {
+            color: var(--danger);
+        }
+
+        input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]),
+        select,
+        textarea {
+            width: 100%;
+            min-height: 48px;
+            padding: 12px 14px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            outline: none;
+            color: var(--text);
+            background: #fbfcfb;
+            transition:
+                border-color 0.2s,
+                box-shadow 0.2s,
+                background 0.2s;
+        }
+
+        input:hover,
+        select:hover,
+        textarea:hover {
+            border-color: #a7b3a9;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: var(--primary-light);
+            background: #ffffff;
+            box-shadow: 0 0 0 4px rgba(62, 93, 67, 0.12);
+        }
+
+        input:invalid:not(:placeholder-shown) {
+            border-color: var(--danger);
+        }
+
+        textarea {
+            min-height: 125px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+
+        .help-text {
+            margin: 7px 0 0;
+            color: var(--muted);
+            font-size: 0.8rem;
+            line-height: 1.4;
+        }
+
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .option {
+            display: flex;
+            gap: 9px;
+            align-items: center;
+            min-height: 44px;
+            margin: 0;
+            padding: 10px 14px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            cursor: pointer;
+            background: #f9fbf8;
+            transition: 0.2s;
+        }
+
+        .option:hover {
+            border-color: var(--primary-light);
+            background: #f0f5ef;
+        }
+
+        .option input {
+            width: 18px;
+            height: 18px;
+            margin: 0;
+            accent-color: var(--primary);
+        }
+
+        .range-wrapper {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 15px;
+            align-items: center;
+            min-height: 48px;
+            padding: 0 12px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: #fbfcfb;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            accent-color: var(--primary);
+        }
+
+        output {
+            min-width: 42px;
+            padding: 5px 8px;
+            border-radius: 7px;
+            color: #ffffff;
+            text-align: center;
+            background: var(--primary);
+            font-weight: 700;
+        }
+
+        input[type="color"] {
+            width: 100%;
+            height: 48px;
+            padding: 5px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            cursor: pointer;
+            background: #fbfcfb;
+        }
+
+        input[type="file"] {
+            padding: 9px !important;
+        }
+
+        input[type="file"]::file-selector-button {
+            margin-right: 12px;
+            padding: 9px 13px;
+            border: 0;
+            border-radius: 7px;
+            color: #ffffff;
+            cursor: pointer;
+            background: var(--primary);
+        }
+
+        .declaration {
+            padding: 20px;
+            border: 1px solid #d7c58e;
+            border-radius: 14px;
+            background: #fffaf0;
+        }
+
+        .declaration .option {
+            align-items: flex-start;
+            border: 0;
+            padding: 0;
+            background: transparent;
+            line-height: 1.6;
+        }
+
+        .security-notice {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            margin-bottom: 25px;
+            padding: 16px;
+            border-left: 4px solid var(--primary);
+            border-radius: 0 10px 10px 0;
+            color: #36423a;
+            background: #eef4ed;
+            line-height: 1.5;
+        }
+
+        .security-notice strong {
+            color: var(--primary);
+        }
+
+        .button-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            justify-content: flex-end;
+            padding-top: 5px;
+        }
+
+        button,
+        input[type="submit"],
+        input[type="reset"],
+        input[type="button"] {
+            min-height: 48px;
+            padding: 12px 22px;
+            border: 0;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 800;
+            transition:
+                transform 0.2s,
+                box-shadow 0.2s,
+                background 0.2s;
+        }
+
+        button:hover,
+        input[type="submit"]:hover,
+        input[type="reset"]:hover,
+        input[type="button"]:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-primary,
+        input[type="submit"] {
+            color: #ffffff;
+            background: var(--primary);
+            box-shadow: 0 8px 20px rgba(38, 59, 42, 0.22);
+        }
+
+        .btn-primary:hover,
+        input[type="submit"]:hover {
+            background: var(--primary-light);
+        }
+
+        .btn-secondary,
+        input[type="button"] {
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            background: #ffffff;
+        }
+
+        .btn-reset,
+        input[type="reset"] {
+            color: #7b261f;
+            border: 1px solid #e1b7b2;
+            background: #fff5f4;
+        }
+
+        .progress-container {
+            margin-bottom: 28px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.86rem;
+            font-weight: 700;
+        }
+
+        progress,
+        meter {
+            width: 100%;
+            height: 18px;
+            accent-color: var(--primary);
+        }
+
+        .hidden-field {
+            display: none;
+        }
+
+        footer {
+            padding: 20px;
+            color: var(--muted);
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 800px) {
+            .form-intro {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .field,
+            .field.third,
+            .field.quarter {
+                grid-column: 1 / -1;
+            }
+
+            form {
+                padding: 20px;
+            }
+
+            fieldset {
+                padding: 20px 16px;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .container {
+                width: min(100% - 20px, 1150px);
+            }
+
+            .options,
+            .button-row {
+                flex-direction: column;
+            }
+
+            .option,
+            button,
+            input[type="submit"],
+            input[type="reset"],
+            input[type="button"] {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="page-header">
+        <div class="header-badge" aria-hidden="true">★</div>
+
+        <h1>Personnel Registration</h1>
+
+        <p>
+            Complete the form below to register a new service member.
+            Fields marked with an asterisk are required.
+        </p>
+    </header>
+
+    <main class="container">
+
+        <section class="form-card">
+
+            <div class="form-intro">
+                <div>
+                    <h2>Soldier Registration Form</h2>
+                    <p>
+                        Please enter accurate personal, contact, service and
+                        emergency information.
+                    </p>
+                </div>
+
+                <div class="reference-number">
+                    FORM: PR-001
+                </div>
+            </div>
+
+            <form
+                id="soldierForm"
+                action="#"
+                method="post"
+                enctype="multipart/form-data"
+            >
+
+                <!-- Hidden input example -->
+                <input
+                    type="hidden"
+                    name="formVersion"
+                    value="1.0"
+                >
+
+                <div class="progress-container">
+                    <div class="progress-header">
+                        <span>Form completion</span>
+                        <span id="progressText">0%</span>
+                    </div>
+
+                    <progress
+                        id="formProgress"
+                        value="0"
+                        max="100"
+                    >
+                        0%
+                    </progress>
+                </div>
+
+                <div class="security-notice">
+                    <span aria-hidden="true">🔒</span>
+
+                    <div>
+                        <strong>Privacy notice:</strong>
+                        Only collect information that is necessary and permitted
+                        under your organisation's privacy and data-protection
+                        policies.
+                    </div>
+                </div>
+
+                <!-- PERSONAL INFORMATION -->
+                <fieldset>
+                    <legend>1. Personal information</legend>
+
+                    <p class="section-description">
+                        Enter the applicant's legal identity details.
+                    </p>
+
+                    <div class="form-grid">
+
+                        <div class="field third">
+                            <label for="title">Title</label>
+
+                            <select id="title" name="title">
+                                <option value="">Select a title</option>
+                                <option value="mr">Mr</option>
+                                <option value="mrs">Mrs</option>
+                                <option value="miss">Miss</option>
+                                <option value="ms">Ms</option>
+                                <option value="dr">Dr</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <!-- Text input -->
+                        <div class="field third">
+                            <label for="firstName">
+                                First name
+                                <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="firstName"
+                                name="firstName"
+                                placeholder="Enter first name"
+                                autocomplete="given-name"
+                                required
+                            >
+                        </div>
+
+                        <div class="field third">
+                            <label for="lastName">
+                                Last name
+                                <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="lastName"
+                                name="lastName"
+                                placeholder="Enter last name"
+                                autocomplete="family-name"
+                                required
+                            >
+                        </div>
+
+                        <div class="field">
+                            <label for="preferredName">
+                                Preferred name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="preferredName"
+                                name="preferredName"
+                                placeholder="Name used in daily communication"
+                            >
+                        </div>
+
+                        <!-- Date input -->
+                        <div class="field">
+                            <label for="dateOfBirth">
+                                Date of birth
+                                <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="date"
+                                id="dateOfBirth"
+                                name="dateOfBirth"
+                                required
+                            >
+                        </div>
+
+                        <!-- Radio inputs -->
+                        <div class="field full">
+                            <span class="group-label">
+                                Gender
+                                <span class="required">*</span>
+                            </span>
+
+                            <div class="options">
+                                <label class="option">
+                                    <input
+                                        type="radio"
+                                        name="gender"
+                                        value="male"
+                                        required
+                                    >
+                                    Male
+                                </label>
+
+                                <label class="option">
+                                    <input
+                                        type="radio"
+                                        name="gender"
+                                        value="female"
+                                    >
+                                    Female
+                                </label>
+
+                                <label class="option">
+                                    <input
+                                        type="radio"
+                                        name="gender"
+                                        value="other"
+                                    >
+                                    Other
+                                </label>
+
+                                <label class="option">
+                                    <input
+                                        type="radio"
+                                        name="gender"
+                                        value="prefer-not-to-say"
+                                    >
+                                    Prefer not to say
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label for="nationality">
+                                Nationality
+                                <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="nationality"
+                                name="nationality"
+                                list="nationalityList"
+                                placeholder="Start typing a nationality"
+                                required
+                            >
+
+                            <!-- Datalist element -->
+                            <datalist id="nationalityList">
+                                <option value="British">
+                                <option value="Irish">
+                                <option value="Somali">
+                                <option value="French">
+                                <option value="German">
+                                <option value="Italian">
+                                <option value="Spanish">
+                                <option value="American">
+                                <option value="Canadian">
+                                <option value="Australian">
+                            </datalist>
+                        </div>
+
+                        <div class="field">
+                            <label for="nationalId">
+                                National identification number
+                            </label>
+
+                            <input
+                                type="text"
+                                id="nationalId"
+                                name="nationalId"
+                                placeholder="Enter identification number"
+                            >
+                        </div>
+
+                        <!-- Month input -->
+                        <div class="field">
+                            <label for="idExpiryMonth">
+                                Identification expiry month
+                            </label>
+
+                            <input
+                                type="month"
+                                id="idExpiryMonth"
+                                name="idExpiryMonth"
+                            >
+                        </div>
+
+                        <!-- Color input -->
+                        <div class="field">
+                            <label for="identificationColour">
+                                Identification badge colour
+                            </label>
+
+                            <input
+                                type="color"
+                                id="identificationColour"
+                                name="identificationColour"
+                                value="#263b2a"
+                            >
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- CONTACT INFORMATION -->
+                <fieldset>
+                    <legend>2. Contact information</legend>
+
+                    <p class="section-description">
+                        Enter the applicant's current contact details.
+                    </p>
+
+                    <div class="form-grid">
+
+                        <!-- Email input -->
+                        <div class="field">
+                            <label for="email">
+                                Email address
+                                <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="name@example.com"
+                                autocomplete="email"
+                                required
+                            >
+                        </div>
+
+                        <!-- Telephone input -->
+                        <div class="field">
+                            <label for="phone">
+                                Telephone number
+                                <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="phone"
+                                name="phone"
+                                placeholder="+44 7000 000000"
+                                autocomplete="tel"
+                                required
+                            >
+                        </div>
+
+                        <div class="field full">
+                            <label for="address">
+                                Address
+                                <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="address"
+                                name="address"
+                                placeholder="House number and street"
+                                autocomplete="street-address"
+                                required
+                            >
+                        </div>
+
+                        <div class="field third">
+                            <label for="city">Town or city</label>
+
+                            <input
+                                type="text"
+                                id="city"
+                                name="city"
+                                placeholder="London"
+                                autocomplete="address-level2"
+                            >
+                        </div>
+
+                        <div class="field third">
+                            <label for="postcode">Postcode</label>
+
+                            <input
+                                type="text"
+                                id="postcode"
+                                name="postcode"
+                                placeholder="NW1 1AA"
+                                autocomplete="postal-code"
+                            >
+                        </div>
+
+                        <div class="field third">
+                            <label for="country">Country</label>
+
+                            <select
+                                id="country"
+                                name="country"
+                                autocomplete="country-name"
+                            >
+                                <option value="">Select a country</option>
+                                <option value="UK">United Kingdom</option>
+                                <option value="Ireland">Ireland</option>
+                                <option value="Somalia">Somalia</option>
+                                <option value="France">France</option>
+                                <option value="Germany">Germany</option>
+                                <option value="USA">United States</option>
+                                <option value="Canada">Canada</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <!-- URL input -->
+                        <div class="field full">
+                            <label for="profileUrl">
+                                Applicant profile URL
+                            </label>
+
+                            <input
+                                type="url"
+                                id="profileUrl"
+                                name="profileUrl"
+                                placeholder="https://example.com/profile"
+                            >
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- SERVICE INFORMATION -->
+                <fieldset>
+                    <legend>3. Service information</legend>
+
+                    <p class="section-description">
+                        Enter the applicant's proposed service and assignment
+                        information.
+                    </p>
+
+                    <div class="form-grid">
+
+                        <div class="field">
+                            <label for="serviceNumber">
+                                Service number
+                                <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="serviceNumber"
+                                name="serviceNumber"
+                                placeholder="Example: SRV-2026-001"
+                                pattern="[A-Za-z0-9-]{5,20}"
+                                required
+                            >
+
+                            <p class="help-text">
+                                Use 5–20 letters, numbers or hyphens.
+                            </p>
+                        </div>
+
+                        <div class="field">
+                            <label for="rank">Proposed rank</label>
+
+                            <select id="rank" name="rank">
+                                <option value="">Select a rank</option>
+                                <option value="recruit">Recruit</option>
+                                <option value="private">Private</option>
+                                <option value="lance-corporal">
+                                    Lance Corporal
+                                </option>
+                                <option value="corporal">Corporal</option>
+                                <option value="sergeant">Sergeant</option>
+                                <option value="officer">Officer</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label for="unit">Assigned unit</label>
+
+                            <input
+                                type="text"
+                                id="unit"
+                                name="unit"
+                                placeholder="Enter unit or department"
+                            >
+                        </div>
+
+                        <div class="field">
+                            <label for="specialisation">
+                                Specialisation
+                            </label>
+
+                            <select
+                                id="specialisation"
+                                name="specialisation"
+                            >
+                                <option value="">
+                                    Select a specialisation
+                                </option>
+                                <option value="administration">
+                                    Administration
+                                </option>
+                                <option value="communications">
+                                    Communications
+                                </option>
+                                <option value="engineering">
+                                    Engineering
+                                </option>
+                                <option value="logistics">Logistics</option>
+                                <option value="medical">Medical</option>
+                                <option value="technology">
+                                    Information technology
+                                </option>
+                                <option value="transport">Transport</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <!-- Week input -->
+                        <div class="field">
+                            <label for="trainingWeek">
+                                Preferred training week
+                            </label>
+
+                            <input
+                                type="week"
+                                id="trainingWeek"
+                                name="trainingWeek"
+                            >
+                        </div>
+
+                        <!-- Time input -->
+                        <div class="field">
+                            <label for="reportingTime">
+                                Preferred reporting time
+                            </label>
+
+                            <input
+                                type="time"
+                                id="reportingTime"
+                                name="reportingTime"
+                            >
+                        </div>
+
+                        <!-- Datetime-local input -->
+                        <div class="field">
+                            <label for="registrationAppointment">
+                                Registration appointment
+                            </label>
+
+                            <input
+                                type="datetime-local"
+                                id="registrationAppointment"
+                                name="registrationAppointment"
+                            >
+                        </div>
+
+                        <!-- Number input -->
+                        <div class="field">
+                            <label for="experienceYears">
+                                Relevant experience in years
+                            </label>
+
+                            <input
+                                type="number"
+                                id="experienceYears"
+                                name="experienceYears"
+                                min="0"
+                                max="50"
+                                step="1"
+                                value="0"
+                            >
+                        </div>
+
+                        <!-- Range input -->
+                        <div class="field full">
+                            <label for="fitnessLevel">
+                                Self-assessed fitness level
+                            </label>
+
+                            <div class="range-wrapper">
+                                <input
+                                    type="range"
+                                    id="fitnessLevel"
+                                    name="fitnessLevel"
+                                    min="1"
+                                    max="10"
+                                    value="5"
+                                    oninput="fitnessOutput.value = this.value"
+                                >
+
+                                <output
+                                    id="fitnessOutput"
+                                    name="fitnessOutput"
+                                >
+                                    5
+                                </output>
+                            </div>
+
+                            <p class="help-text">
+                                Select a value from 1 to 10. This is only an
+                                initial self-assessment.
+                            </p>
+                        </div>
+
+                        <!-- Checkbox inputs -->
+                        <div class="field full">
+                            <span class="group-label">
+                                Skills and qualifications
+                            </span>
+
+                            <div class="options">
+                                <label class="option">
+                                    <input
+                                        type="checkbox"
+                                        name="skills"
+                                        value="first-aid"
+                                    >
+                                    First aid
+                                </label>
+
+                                <label class="option">
+                                    <input
+                                        type="checkbox"
+                                        name="skills"
+                                        value="driving"
+                                    >
+                                    Driving
+                                </label>
+
+                                <label class="option">
+                                    <input
+                                        type="checkbox"
+                                        name="skills"
+                                        value="engineering"
+                                    >
+                                    Engineering
+                                </label>
+
+                                <label class="option">
+                                    <input
+                                        type="checkbox"
+                                        name="skills"
+                                        value="communications"
+                                    >
+                                    Communications
+                                </label>
+
+                                <label class="option">
+                                    <input
+                                        type="checkbox"
+                                        name="skills"
+                                        value="languages"
+                                    >
+                                    Languages
+                                </label>
+
+                                <label class="option">
+                                    <input
+                                        type="checkbox"
+                                        name="skills"
+                                        value="leadership"
+                                    >
+                                    Leadership
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Search input -->
+                        <div class="field full">
+                            <label for="qualificationSearch">
+                                Search qualification records
+                            </label>
+
+                            <input
+                                type="search"
+                                id="qualificationSearch"
+                                name="qualificationSearch"
+                                placeholder="Search by certificate or qualification"
+                            >
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- PHYSICAL AND UNIFORM INFORMATION -->
+                <fieldset>
+                    <legend>4. Physical and uniform information</legend>
+
+                    <p class="section-description">
+                        Collect only information required for approved uniform
+                        fitting or occupational assessment.
+                    </p>
+
+                    <div class="form-grid">
+
+                        <div class="field quarter">
+                            <label for="height">
+                                Height in centimetres
+                            </label>
+
+                            <input
+                                type="number"
+                                id="height"
+                                name="height"
+                                min="100"
+                                max="250"
+                                placeholder="180"
+                            >
+                        </div>
+
+                        <div class="field quarter">
+                            <label for="uniformSize">
+                                Uniform size
+                            </label>
+
+                            <select id="uniformSize" name="uniformSize">
+                                <option value="">Select</option>
+                                <option value="xs">XS</option>
+                                <option value="s">S</option>
+                                <option value="m">M</option>
+                                <option value="l">L</option>
+                                <option value="xl">XL</option>
+                                <option value="xxl">XXL</option>
+                            </select>
+                        </div>
+
+                        <div class="field quarter">
+                            <label for="bootSize">Boot size</label>
+
+                            <input
+                                type="number"
+                                id="bootSize"
+                                name="bootSize"
+                                min="3"
+                                max="16"
+                                step="0.5"
+                                placeholder="9"
+                            >
+                        </div>
+
+                        <div class="field quarter">
+                            <label for="headwearSize">
+                                Headwear size in centimetres
+                            </label>
+
+                            <input
+                                type="number"
+                                id="headwearSize"
+                                name="headwearSize"
+                                min="45"
+                                max="75"
+                                placeholder="58"
+                            >
+                        </div>
+
+                        <div class="field full">
+                            <label for="accessibilityRequirements">
+                                Accessibility or adjustment requirements
+                            </label>
+
+                            <textarea
+                                id="accessibilityRequirements"
+                                name="accessibilityRequirements"
+                                placeholder="Describe any reasonable adjustments required during registration or training."
+                            ></textarea>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- EMERGENCY CONTACT -->
+                <fieldset>
+                    <legend>5. Emergency contact</legend>
+
+                    <p class="section-description">
+                        Provide details for a person who may be contacted in an
+                        emergency.
+                    </p>
+
+                    <div class="form-grid">
+
+                        <div class="field">
+                            <label for="emergencyName">
+                                Full name
+                                <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="emergencyName"
+                                name="emergencyName"
+                                placeholder="Emergency contact's name"
+                                required
+                            >
+                        </div>
+
+                        <div class="field">
+                            <label for="relationship">
+                                Relationship
+                                <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="relationship"
+                                name="relationship"
+                                placeholder="Example: parent or spouse"
+                                required
+                            >
+                        </div>
+
+                        <div class="field">
+                            <label for="emergencyPhone">
+                                Telephone number
+                                <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="emergencyPhone"
+                                name="emergencyPhone"
+                                placeholder="+44 7000 000000"
+                                required
+                            >
+                        </div>
+
+                        <div class="field">
+                            <label for="emergencyEmail">
+                                Email address
+                            </label>
+
+                            <input
+                                type="email"
+                                id="emergencyEmail"
+                                name="emergencyEmail"
+                                placeholder="contact@example.com"
+                            >
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- DOCUMENTS -->
+                <fieldset>
+                    <legend>6. Supporting documents</legend>
+
+                    <p class="section-description">
+                        Upload only authorised documents using secure storage.
+                    </p>
+
+                    <div class="form-grid">
+
+                        <!-- File input -->
+                        <div class="field">
+                            <label for="profilePhoto">
+                                Profile photograph
+                            </label>
+
+                            <input
+                                type="file"
+                                id="profilePhoto"
+                                name="profilePhoto"
+                                accept="image/png, image/jpeg, image/webp"
+                            >
+
+                            <p class="help-text">
+                                Accepted formats: JPG, PNG or WebP.
+                            </p>
+                        </div>
+
+                        <div class="field">
+                            <label for="identityDocument">
+                                Identification document
+                            </label>
+
+                            <input
+                                type="file"
+                                id="identityDocument"
+                                name="identityDocument"
+                                accept=".pdf,.jpg,.jpeg,.png"
+                            >
+                        </div>
+
+                        <div class="field full">
+                            <label for="certificates">
+                                Certificates and qualifications
+                            </label>
+
+                            <input
+                                type="file"
+                                id="certificates"
+                                name="certificates"
+                                accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                                multiple
+                            >
+
+                            <p class="help-text">
+                                You may select more than one file.
+                            </p>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- ACCOUNT INFORMATION -->
+                <fieldset>
+                    <legend>7. Registration account</legend>
+
+                    <p class="section-description">
+                        Demonstration of password and account-related input
+                        elements.
+                    </p>
+
+                    <div class="form-grid">
+
+                        <div class="field">
+                            <label for="username">
+                                Username
+                                <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="username"
+                                name="username"
+                                minlength="5"
+                                maxlength="20"
+                                placeholder="Choose a username"
+                                autocomplete="username"
+                                required
+                            >
+                        </div>
+
+                        <!-- Password input -->
+                        <div class="field">
+                            <label for="password">
+                                Password
+                                <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                minlength="8"
+                                placeholder="Minimum 8 characters"
+                                autocomplete="new-password"
+                                required
+                            >
+                        </div>
+
+                        <div class="field">
+                            <label for="confirmPassword">
+                                Confirm password
+                                <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="password"
+                                id="confirmPassword"
+                                name="confirmPassword"
+                                minlength="8"
+                                placeholder="Re-enter password"
+                                autocomplete="new-password"
+                                required
+                            >
+                        </div>
+
+                        <!-- Read-only input -->
+                        <div class="field">
+                            <label for="accountType">Account type</label>
+
+                            <input
+                                type="text"
+                                id="accountType"
+                                name="accountType"
+                                value="Personnel applicant"
+                                readonly
+                            >
+                        </div>
+
+                        <!-- Disabled input -->
+                        <div class="field full">
+                            <label for="approvalStatus">
+                                Approval status
+                            </label>
+
+                            <input
+                                type="text"
+                                id="approvalStatus"
+                                name="approvalStatus"
+                                value="Pending review"
+                                disabled
+                            >
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- NOTES AND DECLARATION -->
+                <fieldset>
+                    <legend>8. Additional information and declaration</legend>
+
+                    <div class="form-grid">
+
+                        <!-- Textarea -->
+                        <div class="field full">
+                            <label for="additionalNotes">
+                                Additional notes
+                            </label>
+
+                            <textarea
+                                id="additionalNotes"
+                                name="additionalNotes"
+                                maxlength="1000"
+                                placeholder="Enter any additional information relevant to the application."
+                            ></textarea>
+
+                            <p class="help-text">
+                                Maximum 1,000 characters.
+                            </p>
+                        </div>
+
+                        <!-- Meter element -->
+                        <div class="field full">
+                            <label for="applicationReadiness">
+                                Application readiness example
+                            </label>
+
+                            <meter
+                                id="applicationReadiness"
+                                min="0"
+                                max="100"
+                                low="40"
+                                high="80"
+                                optimum="100"
+                                value="65"
+                            >
+                                65%
+                            </meter>
+                        </div>
+
+                        <div class="field full">
+                            <div class="declaration">
+
+                                <label class="option">
+                                    <input
+                                        type="checkbox"
+                                        id="declaration"
+                                        name="declaration"
+                                        value="accepted"
+                                        required
+                                    >
+
+                                    <span>
+                                        I confirm that the information provided
+                                        is accurate to the best of my knowledge.
+                                        I understand that the information must
+                                        be processed securely and according to
+                                        applicable policies.
+                                        <span class="required">*</span>
+                                    </span>
+                                </label>
+
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div class="button-row">
+
+                    <!-- Reset input -->
+                    <input
+                        class="btn-reset"
+                        type="reset"
+                        value="Clear form"
+                    >
+
+                    <!-- Button input -->
+                    <input
+                        class="btn-secondary"
+                        type="button"
+                        value="Save draft"
+                        id="saveDraftButton"
+                    >
+
+                    <!-- Standard button element -->
+                    <button
+                        class="btn-secondary"
+                        type="button"
+                        id="previewButton"
+                    >
+                        Preview details
+                    </button>
+
+                    <!-- Submit input -->
+                    <input
+                        class="btn-primary"
+                        type="submit"
+                        value="Submit registration"
+                    >
+
+                </div>
+            </form>
+
+            <footer>
+                Demonstration form only. A production system would require a
+                secure server, authentication, validation, access controls and
+                encrypted storage.
+            </footer>
+
+        </section>
+    </main>
+
+    <script>
+        const form = document.getElementById("soldierForm");
+        const progress = document.getElementById("formProgress");
+        const progressText = document.getElementById("progressText");
+        const saveDraftButton = document.getElementById("saveDraftButton");
+        const previewButton = document.getElementById("previewButton");
+
+        const password = document.getElementById("password");
+        const confirmPassword =
+            document.getElementById("confirmPassword");
+
+        function updateProgress() {
+            const requiredFields = [
+                ...form.querySelectorAll("[required]")
+            ];
+
+            let completed = 0;
+
+            requiredFields.forEach((field) => {
+                if (
+                    (field.type === "checkbox" ||
+                        field.type === "radio") &&
+                    field.checked
+                ) {
+                    completed++;
+                } else if (
+                    field.type !== "checkbox" &&
+                    field.type !== "radio" &&
+                    field.value.trim() !== ""
+                ) {
+                    completed++;
+                }
+            });
+
+            const percentage = requiredFields.length
+                ? Math.round(
+                    (completed / requiredFields.length) * 100
+                )
+                : 0;
+
+            progress.value = percentage;
+            progressText.textContent = percentage + "%";
+        }
+
+        function checkPasswords() {
+            if (
+                confirmPassword.value &&
+                password.value !== confirmPassword.value
+            ) {
+                confirmPassword.setCustomValidity(
+                    "The passwords do not match."
+                );
+            } else {
+                confirmPassword.setCustomValidity("");
+            }
+        }
+
+        form.addEventListener("input", () => {
+            updateProgress();
+            checkPasswords();
+        });
+
+        form.addEventListener("change", updateProgress);
+
+        form.addEventListener("reset", () => {
+            setTimeout(() => {
+                progress.value = 0;
+                progressText.textContent = "0%";
+            }, 0);
+        });
+
+        saveDraftButton.addEventListener("click", () => {
+            const formData = new FormData(form);
+            const draft = {};
+
+            formData.forEach((value, key) => {
+                if (!(value instanceof File)) {
+                    draft[key] = value;
+                }
+            });
+
+            localStorage.setItem(
+                "soldierRegistrationDraft",
+                JSON.stringify(draft)
+            );
+
+            alert("Draft saved in this browser.");
+        });
+
+        previewButton.addEventListener("click", () => {
+            const firstName =
+                document.getElementById("firstName").value ||
+                "Not entered";
+
+            const lastName =
+                document.getElementById("lastName").value ||
+                "Not entered";
+
+            const serviceNumber =
+                document.getElementById("serviceNumber").value ||
+                "Not entered";
+
+            const unit =
+                document.getElementById("unit").value ||
+                "Not assigned";
+
+            alert(
+                "Registration preview\n\n" +
+                "Name: " + firstName + " " + lastName + "\n" +
+                "Service number: " + serviceNumber + "\n" +
+                "Unit: " + unit
+            );
+        });
+
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            checkPasswords();
+
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            alert(
+                "Registration form validated successfully.\n\n" +
+                "Connect the form to a secure server to store the data."
+            );
+        });
+
+        updateProgress();
+    </script>
+
+</body>
+</html>
