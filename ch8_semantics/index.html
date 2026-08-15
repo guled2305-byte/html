@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="A webpage demonstrating HTML semantic elements with examples."
+    >
+
+    <title>HTML Semantic Elements Guide</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+            color: #1f2937;
+            background: #f3f4f6;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        .container {
+            width: min(1100px, 92%);
+            margin: 0 auto;
+        }
+
+        /* Header */
+
+        .site-header {
+            padding: 70px 20px;
+            text-align: center;
+            color: white;
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(15, 23, 42, 0.96),
+                    rgba(37, 99, 235, 0.9)
+                );
+        }
+
+        .site-header h1 {
+            margin-bottom: 15px;
+            font-size: clamp(2.2rem, 6vw, 4.5rem);
+        }
+
+        .site-header p {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            color: #dbeafe;
+        }
+
+        /* Navigation */
+
+        .main-navigation {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: #111827;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .main-navigation ul {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 5px;
+            padding: 12px;
+            list-style: none;
+        }
+
+        .main-navigation a {
+            display: block;
+            padding: 9px 14px;
+            border-radius: 6px;
+            color: white;
+            text-decoration: none;
+            transition: 0.2s ease;
+        }
+
+        .main-navigation a:hover,
+        .main-navigation a:focus {
+            background: #2563eb;
+        }
+
+        /* Main content */
+
+        main {
+            padding: 45px 0;
+        }
+
+        .introduction {
+            margin-bottom: 35px;
+            padding: 30px;
+            border-left: 6px solid #2563eb;
+            border-radius: 10px;
+            background: white;
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+        }
+
+        .introduction h2 {
+            margin-bottom: 10px;
+        }
+
+        .semantic-section {
+            margin-bottom: 35px;
+            padding: 30px;
+            border-radius: 14px;
+            background: white;
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+        }
+
+        .semantic-section > h2 {
+            margin-bottom: 10px;
+            color: #1d4ed8;
+            font-size: 2rem;
+        }
+
+        .semantic-section > p {
+            margin-bottom: 20px;
+        }
+
+        .element-name {
+            padding: 3px 8px;
+            border-radius: 5px;
+            color: #f8fafc;
+            background: #111827;
+            font-family: Consolas, monospace;
+            font-size: 0.9em;
+        }
+
+        .example-box {
+            margin-top: 20px;
+            padding: 25px;
+            border: 2px dashed #93c5fd;
+            border-radius: 10px;
+            background: #eff6ff;
+        }
+
+        .example-box h3 {
+            margin-bottom: 12px;
+        }
+
+        .example-box p {
+            margin-bottom: 10px;
+        }
+
+        .example-label {
+            display: inline-block;
+            margin-bottom: 15px;
+            padding: 5px 10px;
+            border-radius: 20px;
+            color: white;
+            background: #2563eb;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        /* Article and aside layout */
+
+        .content-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
+        }
+
+        article {
+            padding: 25px;
+            border-radius: 10px;
+            background: #f8fafc;
+        }
+
+        article header {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #cbd5e1;
+        }
+
+        article footer {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #cbd5e1;
+            color: #475569;
+        }
+
+        aside {
+            padding: 25px;
+            border-left: 5px solid #f59e0b;
+            border-radius: 10px;
+            background: #fffbeb;
+        }
+
+        aside h3 {
+            margin-bottom: 10px;
+        }
+
+        /* Lists */
+
+        .example-list {
+            padding-left: 25px;
+        }
+
+        .example-list li {
+            margin-bottom: 8px;
+        }
+
+        /* Figure */
+
+        figure {
+            max-width: 650px;
+            margin: 20px auto;
+            overflow: hidden;
+            border-radius: 10px;
+            background: white;
+            box-shadow: 0 8px 18px rgba(15, 23, 42, 0.15);
+        }
+
+        figure img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+        }
+
+        figcaption {
+            padding: 15px;
+            text-align: center;
+            color: #475569;
+        }
+
+        /* Quotes */
+
+        blockquote {
+            margin: 20px 0;
+            padding: 20px;
+            border-left: 5px solid #8b5cf6;
+            border-radius: 8px;
+            background: #f5f3ff;
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        blockquote footer {
+            margin-top: 10px;
+            color: #6b21a8;
+            font-style: normal;
+            font-weight: bold;
+        }
+
+        /* Details */
+
+        details {
+            margin-bottom: 12px;
+            padding: 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            background: white;
+        }
+
+        summary {
+            cursor: pointer;
+            color: #1d4ed8;
+            font-weight: bold;
+        }
+
+        details p {
+            margin-top: 12px;
+        }
+
+        /* Progress and meter */
+
+        progress,
+        meter {
+            width: 100%;
+            height: 25px;
+            margin: 8px 0 18px;
+        }
+
+        /* Table */
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        caption {
+            margin-bottom: 12px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        th,
+        td {
+            padding: 14px;
+            border: 1px solid #cbd5e1;
+            text-align: left;
+        }
+
+        th {
+            color: white;
+            background: #1e3a8a;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #eff6ff;
+        }
+
+        /* Form */
+
+        form {
+            display: grid;
+            gap: 20px;
+        }
+
+        fieldset {
+            padding: 22px;
+            border: 2px solid #93c5fd;
+            border-radius: 10px;
+        }
+
+        legend {
+            padding: 0 10px;
+            color: #1d4ed8;
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #94a3b8;
+            border-radius: 6px;
+            font: inherit;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #2563eb;
+            outline: 3px solid rgba(37, 99, 235, 0.15);
+        }
+
+        .radio-group label,
+        .checkbox-group label {
+            display: inline-flex;
+            align-items: center;
+            margin-right: 20px;
+            font-weight: normal;
+        }
+
+        .radio-group input,
+        .checkbox-group input {
+            width: auto;
+            margin-right: 7px;
+        }
+
+        button {
+            padding: 13px 22px;
+            border: none;
+            border-radius: 7px;
+            color: white;
+            background: #2563eb;
+            font: inherit;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        /* Code */
+
+        pre {
+            margin-top: 15px;
+            padding: 18px;
+            overflow-x: auto;
+            border-radius: 8px;
+            color: #e2e8f0;
+            background: #0f172a;
+        }
+
+        code,
+        kbd,
+        samp {
+            font-family: Consolas, Monaco, monospace;
+        }
+
+        kbd {
+            padding: 4px 8px;
+            border: 1px solid #64748b;
+            border-bottom-width: 3px;
+            border-radius: 5px;
+            color: white;
+            background: #334155;
+        }
+
+        mark {
+            padding: 2px 5px;
+            border-radius: 3px;
+            background: #fef08a;
+        }
+
+        address {
+            padding: 20px;
+            border-radius: 8px;
+            background: #ecfdf5;
+            font-style: normal;
+        }
+
+        /* Footer */
+
+        .site-footer {
+            padding: 35px 20px;
+            text-align: center;
+            color: #cbd5e1;
+            background: #111827;
+        }
+
+        .site-footer a {
+            color: #93c5fd;
+        }
+
+        /* Responsive design */
+
+        @media (max-width: 750px) {
+            .content-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .semantic-section,
+            .introduction {
+                padding: 20px;
+            }
+
+            .main-navigation ul {
+                justify-content: flex-start;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+            }
+
+            figure img {
+                height: 210px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Semantic page header -->
+    <header class="site-header">
+        <div class="container">
+            <h1>HTML Semantic Elements</h1>
+
+            <p>
+                A visual guide showing how semantic HTML elements are used
+                to create meaningful, accessible and well-structured webpages.
+            </p>
+        </div>
+    </header>
+
+    <!-- Semantic navigation -->
+    <nav class="main-navigation" aria-label="Main navigation">
+        <ul>
+            <li><a href="#structure">Structure</a></li>
+            <li><a href="#article">Article</a></li>
+            <li><a href="#text">Text</a></li>
+            <li><a href="#media">Media</a></li>
+            <li><a href="#interactive">Interactive</a></li>
+            <li><a href="#table">Table</a></li>
+            <li><a href="#form">Form</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main content of the page -->
+    <main class="container">
+
+        <section class="introduction">
+            <h2>What is semantic HTML?</h2>
+
+            <p>
+                Semantic HTML uses elements that describe the meaning and
+                purpose of their content. For example,
+                <code class="element-name">&lt;nav&gt;</code>
+                represents navigation and
+                <code class="element-name">&lt;article&gt;</code>
+                represents independent content.
+            </p>
+        </section>
+
+        <!-- Page structure elements -->
+        <section class="semantic-section" id="structure">
+            <h2>Page Structure Elements</h2>
+
+            <p>
+                These elements organise the main sections of a webpage.
+            </p>
+
+            <div class="example-box">
+                <span class="example-label">Structure example</span>
+
+                <h3>
+                    <code class="element-name">&lt;header&gt;</code>
+                </h3>
+
+                <p>
+                    Contains introductory content such as a title, logo or
+                    navigation.
+                </p>
+
+                <h3>
+                    <code class="element-name">&lt;nav&gt;</code>
+                </h3>
+
+                <p>
+                    Contains important navigation links.
+                </p>
+
+                <h3>
+                    <code class="element-name">&lt;main&gt;</code>
+                </h3>
+
+                <p>
+                    Contains the main and unique content of the webpage.
+                </p>
+
+                <h3>
+                    <code class="element-name">&lt;section&gt;</code>
+                </h3>
+
+                <p>
+                    Groups related content into a meaningful section.
+                </p>
+
+                <h3>
+                    <code class="element-name">&lt;footer&gt;</code>
+                </h3>
+
+                <p>
+                    Contains information such as copyright, contact details
+                    and additional links.
+                </p>
+            </div>
+        </section>
+
+        <!-- Article and aside -->
+        <section class="semantic-section" id="article">
+            <h2>Article and Aside Elements</h2>
+
+            <p>
+                The article element represents independent content, while
+                aside contains related but secondary information.
+            </p>
+
+            <div class="content-layout">
+                <article>
+                    <header>
+                        <h3>Why Semantic HTML Matters</h3>
+
+                        <p>
+                            Published on
+                            <time datetime="2026-07-25">
+                                25 July 2026
+                            </time>
+                        </p>
+                    </header>
+
+                    <section>
+                        <h4>Better accessibility</h4>
+
+                        <p>
+                            Screen readers use semantic elements to understand
+                            the structure of a webpage.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h4>Better search optimisation</h4>
+
+                        <p>
+                            Search engines can better understand clearly
+                            structured content.
+                        </p>
+                    </section>
+
+                    <footer>
+                        <p>Written by Guled Ahmed</p>
+                    </footer>
+                </article>
+
+                <aside>
+                    <h3>Related information</h3>
+
+                    <p>
+                        Semantic HTML also makes code easier for developers to
+                        read, maintain and update.
+                    </p>
+                </aside>
+            </div>
+        </section>
+
+        <!-- Text semantic elements -->
+        <section class="semantic-section" id="text">
+            <h2>Text Semantic Elements</h2>
+
+            <p>
+                These elements give meaning to words, phrases and quotations.
+            </p>
+
+            <div class="example-box">
+                <span class="example-label">Text examples</span>
+
+                <p>
+                    The <strong>strong element</strong> shows strong importance.
+                </p>
+
+                <p>
+                    The <em>em element</em> adds emphasis to text.
+                </p>
+
+                <p>
+                    The <mark>mark element</mark> highlights relevant text.
+                </p>
+
+                <p>
+                    The <small>small element</small> represents side comments
+                    or smaller print.
+                </p>
+
+                <p>
+                    The abbreviation
+                    <abbr title="HyperText Markup Language">HTML</abbr>
+                    has a full meaning inside its title attribute.
+                </p>
+
+                <p>
+                    The product costs
+                    <del>£100</del>
+                    <ins>£75</ins>.
+                </p>
+
+                <p>
+                    Water can be written as H<sub>2</sub>O.
+                </p>
+
+                <p>
+                    Two squared can be written as 2<sup>2</sup>.
+                </p>
+
+                <p>
+                    The event starts at
+                    <time datetime="18:30">6:30 pm</time>.
+                </p>
+
+                <p>
+                    The book <cite>Clean Code</cite> was written by Robert C.
+                    Martin.
+                </p>
+
+                <p>
+                    A short quotation can use the
+                    <q>q element inside a paragraph</q>.
+                </p>
+
+                <blockquote cite="https://example.com">
+                    <p>
+                        Good structure makes webpages easier for people,
+                        browsers and search engines to understand.
+                    </p>
+
+                    <footer>— HTML learning example</footer>
+                </blockquote>
+            </div>
+        </section>
+
+        <!-- Lists -->
+        <section class="semantic-section">
+            <h2>List Elements</h2>
+
+            <div class="example-box">
+                <span class="example-label">List examples</span>
+
+                <h3>Unordered list</h3>
+
+                <ul class="example-list">
+                    <li>Header</li>
+                    <li>Navigation</li>
+                    <li>Main content</li>
+                </ul>
+
+                <br>
+
+                <h3>Ordered list</h3>
+
+                <ol class="example-list">
+                    <li>Create the HTML file</li>
+                    <li>Add semantic elements</li>
+                    <li>Style the page using CSS</li>
+                </ol>
+
+                <br>
+
+                <h3>Description list</h3>
+
+                <dl>
+                    <dt><strong>HTML</strong></dt>
+                    <dd>Defines the structure and content of a webpage.</dd>
+
+                    <dt><strong>CSS</strong></dt>
+                    <dd>Controls the appearance and layout of a webpage.</dd>
+
+                    <dt><strong>JavaScript</strong></dt>
+                    <dd>Adds interactivity and behaviour to a webpage.</dd>
+                </dl>
+            </div>
+        </section>
+
+        <!-- Media elements -->
+        <section class="semantic-section" id="media">
+            <h2>Figure and Media Elements</h2>
+
+            <p>
+                The figure element contains media or illustrations, while
+                figcaption describes the content.
+            </p>
+
+            <figure>
+                <img
+                    src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1000&q=80"
+                    alt="Computer screen displaying programming code"
+                >
+
+                <figcaption>
+                    A computer displaying website development code.
+                </figcaption>
+            </figure>
+
+            <div class="example-box">
+                <h3>Audio example</h3>
+
+                <audio controls>
+                    <source src="example-audio.mp3" type="audio/mpeg">
+
+                    Your browser does not support the audio element.
+                </audio>
+
+                <br><br>
+
+                <h3>Video example</h3>
+
+                <video controls width="100%">
+                    <source src="example-video.mp4" type="video/mp4">
+
+                    <track
+                        src="captions.vtt"
+                        kind="captions"
+                        srclang="en"
+                        label="English"
+                    >
+
+                    Your browser does not support the video element.
+                </video>
+
+                <p>
+                    Add your own audio and video files for these examples to
+                    work.
+                </p>
+            </div>
+        </section>
+
+        <!-- Interactive elements -->
+        <section class="semantic-section" id="interactive">
+            <h2>Interactive Elements</h2>
+
+            <div class="example-box">
+                <span class="example-label">Interactive examples</span>
+
+                <details>
+                    <summary>What does the details element do?</summary>
+
+                    <p>
+                        It creates an expandable section that users can open
+                        and close.
+                    </p>
+                </details>
+
+                <details>
+                    <summary>What does the summary element do?</summary>
+
+                    <p>
+                        It provides the clickable heading for the details
+                        element.
+                    </p>
+                </details>
+
+                <h3>Progress element</h3>
+
+                <label for="course-progress">
+                    HTML course progress: 70%
+                </label>
+
+                <progress
+                    id="course-progress"
+                    value="70"
+                    max="100"
+                >
+                    70%
+                </progress>
+
+                <h3>Meter element</h3>
+
+                <label for="skill-level">
+                    Semantic HTML skill level
+                </label>
+
+                <meter
+                    id="skill-level"
+                    min="0"
+                    max="10"
+                    low="3"
+                    high="8"
+                    optimum="10"
+                    value="7"
+                >
+                    7 out of 10
+                </meter>
+
+                <p>
+                    Press <kbd>Ctrl</kbd> + <kbd>S</kbd> to save your file.
+                </p>
+
+                <p>
+                    Example computer output:
+                    <samp>File saved successfully.</samp>
+                </p>
+            </div>
+        </section>
+
+        <!-- Code elements -->
+        <section class="semantic-section">
+            <h2>Programming Code Elements</h2>
+
+            <p>
+                The code, pre, kbd, var and samp elements represent technical
+                information.
+            </p>
+
+            <div class="example-box">
+                <p>
+                    The <code>&lt;main&gt;</code> element contains the primary
+                    content.
+                </p>
+
+                <p>
+                    In the equation <var>x</var> + 5 = 10, the variable
+                    <var>x</var> equals 5.
+                </p>
+
+                <pre><code>&lt;article&gt;
+    &lt;h2&gt;Article title&lt;/h2&gt;
+    &lt;p&gt;Article content goes here.&lt;/p&gt;
+&lt;/article&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- Table -->
+        <section class="semantic-section" id="table">
+            <h2>Semantic Table Elements</h2>
+
+            <div class="table-wrapper">
+                <table>
+                    <caption>
+                        Common HTML Semantic Elements
+                    </caption>
+
+                    <thead>
+                        <tr>
+                            <th scope="col">Element</th>
+                            <th scope="col">Purpose</th>
+                            <th scope="col">Example use</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>&lt;header&gt;</td>
+                            <td>Introductory content</td>
+                            <td>Logo and page title</td>
+                        </tr>
+
+                        <tr>
+                            <td>&lt;nav&gt;</td>
+                            <td>Navigation links</td>
+                            <td>Main website menu</td>
+                        </tr>
+
+                        <tr>
+                            <td>&lt;main&gt;</td>
+                            <td>Main page content</td>
+                            <td>Unique page information</td>
+                        </tr>
+
+                        <tr>
+                            <td>&lt;article&gt;</td>
+                            <td>Independent content</td>
+                            <td>Blog post or news article</td>
+                        </tr>
+
+                        <tr>
+                            <td>&lt;aside&gt;</td>
+                            <td>Secondary content</td>
+                            <td>Related links or advertisements</td>
+                        </tr>
+
+                        <tr>
+                            <td>&lt;footer&gt;</td>
+                            <td>Closing information</td>
+                            <td>Copyright and contact links</td>
+                        </tr>
+                    </tbody>
+
+                    <tfoot>
+                        <tr>
+                            <td colspan="3">
+                                These elements improve the meaning and
+                                structure of a webpage.
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </section>
+
+        <!-- Form -->
+        <section class="semantic-section" id="form">
+            <h2>Semantic Form Elements</h2>
+
+            <p>
+                Forms use labels, fieldsets and legends to organise form
+                controls clearly.
+            </p>
+
+            <div class="example-box">
+                <form action="#" method="post">
+
+                    <fieldset>
+                        <legend>Personal information</legend>
+
+                        <div class="form-group">
+                            <label for="full-name">Full name</label>
+
+                            <input
+                                type="text"
+                                id="full-name"
+                                name="full-name"
+                                placeholder="Enter your name"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email address</label>
+
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="name@example.com"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="birth-date">Date of birth</label>
+
+                            <input
+                                type="date"
+                                id="birth-date"
+                                name="birth-date"
+                            >
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Course information</legend>
+
+                        <div class="form-group">
+                            <label for="course">Select a course</label>
+
+                            <select id="course" name="course">
+                                <option value="">Choose a course</option>
+                                <option value="html">HTML</option>
+                                <option value="css">CSS</option>
+                                <option value="javascript">JavaScript</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="browser">
+                                Choose or enter a browser
+                            </label>
+
+                            <input
+                                list="browser-options"
+                                id="browser"
+                                name="browser"
+                            >
+
+                            <datalist id="browser-options">
+                                <option value="Google Chrome">
+                                <option value="Microsoft Edge">
+                                <option value="Mozilla Firefox">
+                                <option value="Safari">
+                            </datalist>
+                        </div>
+
+                        <div class="form-group radio-group">
+                            <p><strong>Experience level</strong></p>
+
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="experience"
+                                    value="beginner"
+                                >
+                                Beginner
+                            </label>
+
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="experience"
+                                    value="intermediate"
+                                >
+                                Intermediate
+                            </label>
+                        </div>
+
+                        <div class="form-group checkbox-group">
+                            <p><strong>Topics you enjoy</strong></p>
+
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    name="topics"
+                                    value="design"
+                                >
+                                Design
+                            </label>
+
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    name="topics"
+                                    value="coding"
+                                >
+                                Coding
+                            </label>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Your message</label>
+
+                            <textarea
+                                id="message"
+                                name="message"
+                                placeholder="Write your message here"
+                            ></textarea>
+                        </div>
+                    </fieldset>
+
+                    <button type="submit">Submit form</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Address -->
+        <section class="semantic-section" id="contact">
+            <h2>Address Element</h2>
+
+            <p>
+                The address element contains contact information for a person,
+                organisation or article author.
+            </p>
+
+            <address>
+                <strong>Guled Ahmed</strong>
+                <br>
+
+                Web Development Student
+                <br>
+
+                London, United Kingdom
+                <br>
+
+                Email:
+                <a href="mailto:example@email.com">
+                    example@email.com
+                </a>
+            </address>
+        </section>
+
+    </main>
+
+    <!-- Semantic page footer -->
+    <footer class="site-footer">
+        <p>
+            &copy; 2026 HTML Semantic Elements Guide
+        </p>
+
+        <p>
+            Built using semantic
+            <abbr title="HyperText Markup Language">HTML</abbr>
+            and CSS.
+        </p>
+    </footer>
+
+</body>
+</html>
